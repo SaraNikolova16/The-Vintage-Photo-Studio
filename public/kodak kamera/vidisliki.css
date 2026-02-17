@@ -1,0 +1,310 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kalam', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8 0%, #ffe8f5 50%, #fff0f8 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow: hidden;
+    position: relative;
+    background-image: url('download\ \(15\).png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Soft watercolor texture overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 192, 203, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ============================================
+   FILM ROLL CONTAINER
+   ============================================ */
+
+.film-container {
+    position: relative;
+    width: 1940px;
+    height: 533px;
+    transform: translateX(200%);
+    animation: slideInFromRight 2s ease-out forwards;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.4));
+}
+
+/* Slide in animation - starts from right, stops at center */
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(200%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+/* Film roll frame (on top) */
+.film-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ============================================
+   FILM PHOTOS (BEHIND FRAME)
+   ============================================ */
+
+.film-photo {
+    position: absolute;
+    width: 505px;
+    height: 246px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    top: 51.7%;
+    transform: translateY(-50%);
+}
+
+/* Position each photo to match your transparent rectangles */
+.photo-1 {
+    left: 340px;
+}
+
+.photo-2 {
+    left: 820px;
+}
+
+.photo-3 {
+    left: 1300px;
+}
+
+/* ============================================
+   VINTAGE FILM FILTER
+   ============================================ */
+
+/* Apply warm, dreamy vintage film effect to photos */
+.film-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    
+    /* Warm orange/yellow overlay */
+    background: linear-gradient(
+        135deg,
+        rgba(255, 200, 120, 0.25) 0%,
+        rgba(255, 220, 150, 0.15) 50%,
+        rgba(255, 180, 100, 0.2) 100%
+    );
+    
+    background-image: radial-gradient(ellipse, #0000, #0007),
+            linear-gradient(0deg, #9725, #9725),
+            url(https://i.ibb.co/vJt5HSh/noisy-texture-300x300-o10-d10-c-a82851-t1.png);
+    filter: blur(0.05rem) saturate(0.7) contrast(1.5) brightness(1.2);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.8;
+
+}
+
+/* Soft focus and color adjustments */
+.film-photo {
+    filter: 
+        saturate(1.2)
+        contrast(0.9)
+        brightness(1.05)
+        sepia(0.15)
+        hue-rotate(-5deg);
+}
+
+/* Add subtle vignette */
+.film-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.15) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   DEVELOP FILM BUTTON
+   ============================================ */
+
+.develop-btn {
+    background: linear-gradient(135deg, #ffd6e8 0%, #ffb3d9 50%, #ff9ece 100%);
+    border: 4px solid #d4749e;
+    border-radius: 20px;
+    padding: 1rem 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #8b2252;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 25px rgba(255, 105, 180, 0.4),
+        inset 0 3px 8px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 8px rgba(212, 116, 158, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.develop-btn.hidden {
+    display: none;
+}
+
+/* Button appears with bounce animation */
+.develop-btn.visible {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(50px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05) translateY(0);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.develop-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 12px 35px rgba(255, 105, 180, 0.5),
+        inset 0 3px 8px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 8px rgba(212, 116, 158, 0.4);
+}
+
+.develop-btn:active {
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+.btn-icon {
+    font-size: 2rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1100px) {
+    .film-container {
+        width: 800px;
+        height: 400px;
+    }
+    
+    .film-photo {
+        width: 224px;
+        height: 304px;
+    }
+    
+    .photo-1 {
+        left: 64px;
+    }
+    
+    .photo-2 {
+        left: 288px;
+    }
+    
+    .photo-3 {
+        left: 512px;
+    }
+}
+
+@media (max-width: 900px) {
+    .film-container {
+        width: 600px;
+        height: 300px;
+    }
+    
+    .film-photo {
+        width: 168px;
+        height: 228px;
+    }
+    
+    .photo-1 {
+        left: 48px;
+    }
+    
+    .photo-2 {
+        left: 216px;
+    }
+    
+    .photo-3 {
+        left: 384px;
+    }
+    
+    .develop-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.4rem;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .film-container {
+        width: 500px;
+        height: 250px;
+    }
+    
+    .film-photo {
+        width: 140px;
+        height: 190px;
+    }
+    
+    .photo-1 {
+        left: 40px;
+    }
+    
+    .photo-2 {
+        left: 180px;
+    }
+    
+    .photo-3 {
+        left: 320px;
+    }
+    
+    .develop-btn {
+        padding: 0.7rem 1.8rem;
+        font-size: 1.2rem;
+    }
+}

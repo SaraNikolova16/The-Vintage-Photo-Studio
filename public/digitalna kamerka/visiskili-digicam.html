@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Digital Photos</title>
+    <link rel="stylesheet" href="vidiskia-digicam.css">
+</head>
+<body>
+    
+    <!-- Photos display area -->
+    <div class="photos-container">
+        
+        <!-- Photo 1 (tilted left) -->
+        <div class="digital-photo photo-1" data-index="0">
+            <div class="photo-content" id="photoContent1"></div>
+            <div class="photo-timestamp" id="timestamp1"></div>
+            <input type="checkbox" class="photo-checkbox" id="check1">
+            <label for="check1" class="checkbox-label">✓</label>
+        </div>
+
+        <!-- Photo 2 (tilted right) -->
+        <div class="digital-photo photo-2" data-index="1">
+            <div class="photo-content" id="photoContent2"></div>
+            <div class="photo-timestamp" id="timestamp2"></div>
+            <input type="checkbox" class="photo-checkbox" id="check2">
+            <label for="check2" class="checkbox-label">✓</label>
+        </div>
+
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+        <button class="action-btn" id="selectAllBtn">
+            <span class="btn-icon">✓</span>
+            <span class="btn-text">Select All</span>
+        </button>
+        <button class="action-btn" id="downloadBtn">
+            <span class="btn-icon">⬇</span>
+            <span class="btn-text">Download</span>
+        </button>
+        <button class="action-btn" id="shareBtn">
+            <span class="btn-icon">↗</span>
+            <span class="btn-text">Share</span>
+        </button>
+        <button class="action-btn" id="printBtn">
+            <span class="btn-icon">🖨</span>
+            <span class="btn-text">Print</span>
+        </button>
+        <button class="action-btn" id="restartBtn">
+            <span class="btn-icon">↻</span>
+            <span class="btn-text">Restart</span>
+        </button>
+    </div>
+
+    <script src="visdislika-digicam.js"></script>
+</body>
+</html>

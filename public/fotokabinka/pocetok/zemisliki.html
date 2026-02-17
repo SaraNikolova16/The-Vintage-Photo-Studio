@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Photobooth - Delivery</title>
+    <link rel="stylesheet" href="zemisliki.css">
+</head>
+<body>
+    
+    <!-- ============================================
+         SCREEN 1: DELIVERY/TIMER SCREEN
+         Shows countdown timer, then photos slide down
+         ============================================ -->
+    <div class="delivery-screen" id="deliveryScreen">
+        
+        <!-- Timer sign at top -->
+        <div class="timer-container">
+            <!-- Your timer design image (with transparent center) -->
+            <img src="timer.png" alt="Timer Frame" class="timer-frame">
+            
+            <!-- Countdown content (appears inside transparent area) -->
+            <div class="timer-content">
+                <div class="timer-text">PHOTOS DELIVERED<br>HERE IN</div>
+                <div class="timer-number" id="timerNumber">5</div>
+                <div class="timer-seconds">SECONDS</div>
+                <div class="timer-arrow">➺</div>
+            </div>
+        </div>
+
+        <!-- Pickup window frame -->
+        <div class="pickup-window">
+            <!-- Your pickup window design (with transparent center) -->
+            <img src="ramka za sliki.png" alt="Pickup Window" class="pickup-frame">
+            
+            <!-- Photo strip (slides down from top when timer finishes) -->
+            <div class="photo-strip" id="photoStrip">
+                <div class="strip-photo" id="photo1"></div>
+                <div class="strip-photo" id="photo2"></div>
+                <div class="strip-photo" id="photo3"></div>
+                <div class="strip-photo" id="photo4"></div>
+            </div>
+        </div>
+
+        <!-- Pick up button (appears after photos are delivered) -->
+        <button class="pickup-button hidden" id="pickupButton">
+            <span class="button-text">Pick up</span>
+            <span class="button-arrow">➺</span>
+        </button>
+        <script src="zemisliki.js"></script>
+
+    </div>

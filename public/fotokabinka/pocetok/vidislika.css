@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kalam', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d4b8 50%, #d4c4a8 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+}
+
+/* Watercolor texture overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(205, 133, 63, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 90, 43, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Main container */
+.results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Photo strip */
+.photo-strip {
+    width: 150px;
+    height: 500px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    background: white;
+    border: 3px solid #333;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #fff5ee 0%, #fff1e5 50%, #fff3e6 100%);
+    border: 3px solid #3e2723;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #3e2723;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:hover {
+    background: #3e2723;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .photo-strip {
+        width: 160px;
+        height: 440px;
+    }
+    
+    .action-buttons {
+        gap: 1rem;
+    }
+    
+    .action-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+}

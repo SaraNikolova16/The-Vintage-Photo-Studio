@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digi Cam - Taking Photos</title>
+    <link rel="stylesheet" href="slikajse-digicam.css">
+</head>
+<body>
+    
+    <!-- Main container -->
+    <div class="shoot-container">
+        
+       <div class="camera-wrapper">
+  <div class="camera-container">
+    <video id="cameraVideo" autoplay playsinline width="430" height="360"></video>
+  </div>
+  <!-- Countdown overlay -->
+  <div class="countdown-overlay" id="countdownOverlay">
+    <span class="countdown-number" id="countdownNumber"></span>
+  </div>
+  <!-- Camera back image overlay -->
+  <img src="19.png" alt="Camera Back" class="camera-frame">
+</div>
+
+
+        <button class="take-photos-btn" id="takePhotosBtn">
+            <span class="btn-icon">📷</span>
+            <span class="btn-text">Take Photos</span>
+        </button>
+
+        <!-- Process Film button (appears after all 3 photos) -->
+        <a href="visiskili-digicam.html" class="process-btn hidden" id="processBtn">
+            <span class="btn-text">Process Film</span>
+            <span class="btn-icon">➺</span>
+        </button>
+
+    </div>
+
+    <!-- Hidden canvas for capturing photos -->
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+
+    <!-- Face API -->
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+<!-- Your script -->
+<script defer src="/shared/FaceTracker.js?v=32"></script>
+<script defer src="slikajse-digicam.js"></script>
+</body>
+</html>

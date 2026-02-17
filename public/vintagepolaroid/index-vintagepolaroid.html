@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Polaroid Camera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-vintagepolaroid.css">
+</head>
+<body>
+<a href="/src/components/Homepage/Homepage.jsx" class="back-arrow" title="Back to Homepage">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H3.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L3.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
+  </svg>
+</a>
+
+    
+    <!-- Main container -->
+    <div class="polaroid-container">
+        <!-- Flash overlay -->
+<div class="flash-overlay" id="flashOverlay"></div>
+<!-- Lens flare --> <div class="lens-flare" id="lensFlare"></div>
+
+        <!-- Instruction photo -->
+<img src="Click the RED button.png" 
+     alt="Instruction pointing at red button" 
+     class="instruction-photo" 
+     id="instruction">
+
+
+        <!-- Photo that slides out from bottom (OUTSIDE camera wrapper so it can be behind) -->
+        <div class="polaroid-photo hidden" id="polaroidPhoto">
+            <div class="photo-inner" id="photoInner">
+                <!-- Photo develops here -->
+            </div>
+            <div class="photo-caption" id="photoCaption"></div>
+        </div>
+
+        <!-- Polaroid camera wrapper -->
+        <div class="camera-wrapper" id="cameraWrapper">
+            
+            <!-- Hidden video for camera capture -->
+            <video id="cameraVideo" autoplay playsinline style="display: none;"></video>
+            
+            <!-- Camera image -->
+            <img src="download__18_-removebg-preview.png" alt="Polaroid Camera" class="camera-image">
+
+            <!-- Red button (clickable, animates down on press) -->
+            <button class="red-button" id="redButton"></button>
+        </div>
+
+        <!-- Action buttons (appear after photo is taken) -->
+        <div class="action-buttons hidden" id="actionButtons">
+            <button class="action-btn" id="downloadBtn">
+                <span>📥 Download</span>
+            </button>
+            <button class="action-btn" id="writeBtn">
+                <span>✍️ Write Message</span>
+            </button>
+            <button class="action-btn" id="retakeBtn">
+                <span>🔄 Retake</span>
+            </button>
+            <button class="action-btn" id="shareBtn">
+                <span>↗️ Share</span>
+            </button>
+            <button class="action-btn" id="uploadBtn">
+                <span>📤 Upload Photo</span>
+            </button>
+        </div>
+
+        <!-- Write message panel (appears when clicking write button) -->
+        <div class="write-panel hidden" id="writePanel">
+            <input type="text" id="messageInput" placeholder="Write your message..." maxlength="50">
+            <input type="color" id="colorPicker" value="#2c2c2c">
+            <button class="apply-btn" id="applyBtn">Apply</button>
+            <button class="cancel-btn" id="cancelBtn">Cancel</button>
+        </div>
+
+        <!-- Upload input (hidden) -->
+        <input type="file" id="uploadInput" accept="image/*" style="display: none;">
+
+    </div>
+
+    <!-- Hidden canvas for processing -->
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+
+    <script src="script-vintsgepolaroid.js"></script>
+</body>
+</html>

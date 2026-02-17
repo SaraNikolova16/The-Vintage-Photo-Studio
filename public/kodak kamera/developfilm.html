@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developed Photos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="developfilm.css">
+</head>
+<body>
+    
+    <!-- Photos display area -->
+    <div class="photos-container">
+        
+        <!-- Photo 1 (tilted left) -->
+        <div class="vintage-photo photo-1" data-index="0">
+            <div class="photo-content" id="photoContent1"></div>
+            <div class="photo-date" id="date1"></div>
+            <input type="checkbox" class="photo-checkbox" id="check1">
+            <label for="check1" class="checkbox-label">Select</label>
+        </div>
+
+        <!-- Photo 2 (tilted right) -->
+        <div class="vintage-photo photo-2" data-index="1">
+            <div class="photo-content" id="photoContent2"></div>
+            <div class="photo-date" id="date2"></div>
+            <input type="checkbox" class="photo-checkbox" id="check2">
+            <label for="check2" class="checkbox-label">Select</label>
+        </div>
+
+        <!-- Photo 3 (tilted left) -->
+        <div class="vintage-photo photo-3" data-index="2">
+            <div class="photo-content" id="photoContent3"></div>
+            <div class="photo-date" id="date3"></div>
+            <input type="checkbox" class="photo-checkbox" id="check3">
+            <label for="check3" class="checkbox-label">Select</label>
+        </div>
+
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+        <button class="action-btn" id="selectAllBtn">
+            <span class="btn-icon">✓</span>
+            <span class="btn-text">Select All</span>
+        </button>
+        <button class="action-btn" id="downloadBtn">
+            <span class="btn-icon">⬇</span>
+            <span class="btn-text">Download</span>
+        </button>
+        <button class="action-btn" id="shareBtn">
+            <span class="btn-icon">↗</span>
+            <span class="btn-text">Share</span>
+        </button>
+        <button class="action-btn" id="printBtn">
+            <span class="btn-icon">🖨</span>
+            <span class="btn-text">Print</span>
+        </button>
+        <button class="action-btn" id="restartBtn">
+            <span class="btn-icon">↻</span>
+            <span class="btn-text">Restart</span>
+        </button>
+    </div>
+
+    <!-- Fullscreen photo viewer -->
+    <div class="fullscreen-viewer hidden" id="fullscreenViewer">
+        <button class="close-btn" id="closeBtn">✕</button>
+        <button class="nav-btn prev-btn" id="prevBtn">‹</button>
+        <button class="nav-btn next-btn" id="nextBtn">›</button>
+        <img src="" alt="Full Photo" class="fullscreen-image" id="fullscreenImage">
+    </div>
+
+    <!-- Hidden canvas for downloads -->
+    <canvas id="downloadCanvas" style="display: none;"></canvas>
+
+    <script src="developfilm.js"></script>
+</body>
+</html>

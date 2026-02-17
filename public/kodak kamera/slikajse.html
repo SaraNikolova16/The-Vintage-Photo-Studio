@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Camera - Taking Photos</title>
+    <link rel="stylesheet" href="slikajse.css">
+</head>
+<body>
+    
+    <!-- Main container -->
+    <div class="shoot-container">
+        
+        <!-- Camera back with film strip frame -->
+        <div class="camera-wrapper">
+            
+            <!-- Live camera video (shows through transparent center) -->
+            <video id="cameraVideo" autoplay playsinline></video>
+            
+            <!-- Countdown overlay (3, 2, 1) -->
+            <div class="countdown-overlay" id="countdownOverlay">
+                <span class="countdown-number" id="countdownNumber"></span>
+            </div>
+            
+            <!-- Camera back image overlay (with transparent center) -->
+            <img src="kamera00001.png" alt="Camera Back" class="camera-frame">
+
+            
+            
+
+            
+        </div>
+
+        <button class="start-button" id="startButton">
+                <span class="button-text">START</span>
+            </button>
+
+        <!-- Process Film button (appears after all 3 photos) -->
+        <button class="process-btn hidden" id="processBtn">
+            <span class="btn-text">Process Film</span>
+            <span class="btn-icon">➺</span>
+        </button>
+
+    </div>
+
+    <!-- Hidden canvas for capturing photos -->
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+
+    <script src="slikajse.js"></script>
+</body>
+</html>

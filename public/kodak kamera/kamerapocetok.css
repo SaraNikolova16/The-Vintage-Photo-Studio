@@ -1,0 +1,251 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.back-arrow {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #4a3728;
+  background: #fdf6e3;
+  padding: 8px;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow:hover {
+  background: #d4af37;
+  color: #fff;
+  transform: translateY(-2px);
+}
+body {
+    font-family: 'Kalam', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #fffee6 0%, #f9fcce 50%, #feffc4 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft watercolor texture overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 228, 225, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.camera-start-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   CAMERA DISPLAY
+   ============================================ */
+
+.camera-display {
+    position: relative;
+    filter: drop-shadow(0 20px 50px rgba(255, 105, 180, 0.064));
+    animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+@keyframes gentle-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.camera-image {
+    width: 650px;
+    height: auto;
+    max-width: 90vw;
+    display: block;
+}
+
+/* Add a soft glow effect */
+.camera-display::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+    z-index: -1;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+/* ============================================
+   TAKE PHOTOS BUTTON
+   ============================================ */
+
+.take-photos-btn {
+    background: linear-gradient(135deg, #d6f3ff 0%, #b0e9fe 50%, #8deffa 100%);
+    border: 4px solid #0fa2a7;
+    border-radius: 20px;
+    padding: 1.2rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #07323a;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 10px 30px rgba(255, 105, 180, 0.4),
+        inset 0 3px 8px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 8px rgba(212, 116, 158, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button shimmer effect */
+.take-photos-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.take-photos-btn:hover::before {
+    left: 100%;
+}
+
+/* Button hover effect */
+.take-photos-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(255, 105, 180, 0.5),
+        inset 0 3px 8px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 8px rgba(212, 116, 158, 0.4);
+}
+
+.take-photos-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Button icon */
+.btn-icon {
+    font-size: 2rem;
+    animation: camera-flash 2s ease-in-out infinite;
+}
+
+@keyframes camera-flash {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Button text */
+.btn-text {
+    text-shadow: 
+        1px 1px 0px rgba(255, 255, 255, 0.5),
+        0 0 10px rgba(255, 182, 193, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .camera-image {
+        width: 350px;
+    }
+    
+    .take-photos-btn {
+        padding: 1rem 2.5rem;
+        font-size: 1.5rem;
+    }
+    
+    .btn-icon {
+        font-size: 1.8rem;
+    }
+    
+    .floating-deco {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .camera-image {
+        width: 280px;
+    }
+    
+    .take-photos-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.3rem;
+    }
+    
+    .btn-icon {
+        font-size: 1.5rem;
+    }
+    
+    .camera-start-container {
+        gap: 2rem;
+    }
+}

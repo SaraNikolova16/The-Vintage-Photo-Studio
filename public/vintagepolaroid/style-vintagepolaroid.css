@@ -1,0 +1,449 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.back-arrow {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #4a3728;
+  background: #fdf6e3;
+  padding: 8px;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow:hover {
+  background: #d4af37;
+  color: #fff;
+  transform: translateY(-2px);
+}
+body {
+    font-family: 'Caveat', cursive;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d4b8 50%, #d4c4a8 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.polaroid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+}
+
+
+
+.camera-wrapper.photo-taken {
+    transform: translateY(-200px);
+    transition: transform 0.8s ease-out;
+}
+
+
+
+
+.polaroid-photo {
+    position: absolute;
+    bottom: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 330px;
+    background: #fafafa;
+    padding: 15px 15px 60px 15px; /* More space at bottom for caption */
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.1),
+        0 10px 20px rgba(0,0,0,0.15),
+        0 20px 40px rgba(0,0,0,0.2);
+    z-index: 1;
+    opacity: 1;
+    border: 1px solid #e0e0e0;
+}
+
+.polaroid-photo.eject {
+    animation: fadeInPhoto 0.1s ease-out forwards;
+}
+@keyframes fadeInPhoto {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+/* ============================================
+   INSTRUCTION
+   ============================================ */
+.instruction-photo {
+    position: fixed; /* Changed to fixed */
+    top: 50%;
+    left: calc(50% - 470px); /* Centers relative to camera */
+    transform: translateY(-50%);
+    width: 270px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fadeIn 1s ease-out;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================================
+   CAMERA WRAPPER
+   ============================================ */
+
+.camera-wrapper {
+    position: relative;
+    transition: transform 0.8s ease-out;
+    overflow: visible; /* Allow photo to slide out */
+    z-index: 10; /* Camera in front */
+}
+
+.camera-wrapper.photo-taken {
+    transform: translateY(-280px);
+    transition: transform 1.5s ease-out 0.5s; /* Smooth upward movement */
+}
+
+
+.camera-image {
+    width: 500px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    position: relative;
+    z-index: 10; /* Camera ALWAYS in front */
+}
+
+/* ============================================
+   RED BUTTON (CLICKABLE)
+   ============================================ */
+
+.red-button {
+    position: absolute;
+    top: 44.5%;
+    right: 70.5%;
+    width: 52px;
+    height: 52px;
+    background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000);
+    border: 2px solid #660000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    z-index: 30;
+    box-shadow: inset -3px -3px 6px rgba(255,255,255,0.6),
+                inset 3px 3px 6px rgba(0,0,0,0.4),
+                0 4px 8px rgba(0,0,0,0.4);
+}
+
+.red-button:hover {
+    transform: scale(1.1);
+    box-shadow: inset -2px -2px 5px rgba(255,255,255,0.7),
+                inset 2px 2px 5px rgba(0,0,0,0.5),
+                0 6px 12px rgba(0,0,0,0.5);
+}
+
+.red-button:active {
+    transform: translateY(3px) scale(0.95);
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.6),
+                inset -2px -2px 4px rgba(255,255,255,0.5);
+}
+
+
+/* ============================================
+   POLAROID PHOTO
+   ============================================ */
+
+.photo-inner {
+    width: 100%;
+    height: 250px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.photo-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: develop 5s ease-in forwards;
+}
+
+/* Polaroid development animation */
+@keyframes develop {
+    0% { opacity: 0; filter: brightness(0); }
+    20% { opacity: 0.2; filter: brightness(0.3); }
+    40% { opacity: 0.4; filter: brightness(0.5); }
+    60% { opacity: 0.6; filter: brightness(0.7); }
+    80% { opacity: 0.8; filter: brightness(0.9); }
+    100% { opacity: 1; filter: brightness(1); }
+}
+
+/* Vintage polaroid filter */
+.photo-inner img {
+    filter: 
+        saturate(1.1)
+        contrast(0.95)
+        brightness(1.05)
+        sepia(0.15)
+        hue-rotate(-10deg);
+}
+
+/* Vignette overlay */
+.photo-inner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 40%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    pointer-events: none;
+}
+
+/* Warm vintage overlay */
+.photo-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(254, 211, 124, 0.15) 0%,
+        rgba(255, 200, 120, 0.1) 100%
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Photo caption area */
+.photo-caption {
+    margin-top: 12px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 2rem;
+    color: #2c2c2c;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.flash-overlay {
+    position: fixed;
+    inset: 0; /* covers the whole screen */
+    background: white;
+    opacity: 0;
+    pointer-events: none; /* don’t block clicks */
+    z-index: 999; /* above everything */
+    transition: opacity 0.3s ease-out;
+}
+.flash-overlay.active {
+    opacity: 1;
+}
+
+.lens-flare { position: fixed; inset: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0.2) 40%, transparent 70%); opacity: 0; pointer-events: none; z-index: 1000; /* above flash overlay */ transition: opacity 0.4s ease-out; mix-blend-mode: screen; /* makes it glow realistically */ } .lens-flare.active { opacity: 1; }
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d4b8 100%);
+    border: 3px solid #8b4513;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5d4037;
+    font-family: 'Caveat', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #e8d4b8 0%, #d4c4a8 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   WRITE MESSAGE PANEL
+   ============================================ */
+
+.write-panel {
+    position: fixed; /* Fixed positioning so it doesn't move anything */
+    left: 55%;
+    top: 55%;
+    transform: translate(200px, -50%); /* 200px to the right of center */
+    background: white;
+    border: 3px solid #8b4513;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 300px;
+    z-index: 100;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translate(180px, -50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(200px, -50%);
+    }
+}
+
+
+
+#messageInput {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    border: 2px solid #d4c4a8;
+    border-radius: 8px;
+    outline: none;
+}
+
+#colorPicker {
+    width: 100px;
+    height: 40px;
+    border: 2px solid #d4c4a8;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.apply-btn,
+.cancel-btn {
+    padding: 0.6rem 1.2rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: 2px solid #8b4513;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.apply-btn {
+    background: #8b4513;
+    color: white;
+}
+
+.apply-btn:hover {
+    background: #6d3710;
+}
+
+.cancel-btn {
+    background: white;
+    color: #8b4513;
+}
+
+.cancel-btn:hover {
+    background: #f5e6d3;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .camera-image {
+        width: 400px;
+    }
+    
+    .polaroid-photo {
+        width: 220px;
+    }
+    
+    .photo-inner {
+        height: 200px;
+    }
+    
+    .instruction {
+        left: -200px;
+    }
+    
+    .instruction-text {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .camera-image {
+        width: 320px;
+    }
+    
+    .polaroid-photo {
+        width: 180px;
+    }
+    
+    .photo-inner {
+        height: 160px;
+    }
+    
+    .instruction {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+    }
+}

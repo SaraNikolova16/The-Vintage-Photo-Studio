@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Photobooth - Camera</title>
+    <link rel="stylesheet" href="camera.css">
+</head>
+<body>
+    <!-- Main camera container -->
+    <div class="camera-container">
+        
+        <!-- Eye Level indicator (left side) -->
+        <div class="eye-level-indicator">
+            <img src="eyelevel.png" alt="Eye Level" class="eye-level-image">
+        </div>
+
+        <!-- Center area with frame and camera -->
+        <div class="center-area">
+            
+            <!-- Photo frame with camera feed inside -->
+            <div class="photo-frame-wrapper">
+                <!-- Camera video element (shows behind frame) -->
+                <video id="cameraVideo" autoplay playsinline></video>
+                
+                <!-- Countdown overlay (appears during countdown) -->
+                <div class="countdown-overlay" id="countdownOverlay">
+                    <span class="countdown-number" id="countdownNumber"></span>
+                </div>
+                
+                <!-- Frame overlay (your design goes on top) -->
+                <img src="ramka.png" alt="Photo Frame" class="frame-overlay">
+            </div>
+
+            
+
+            <!-- Start button (initially visible) -->
+            <button class="start-button" id="startButton">
+                <span class="button-text">START</span>
+            </button>
+
+            <!-- Collect Photos button (appears after all photos taken) -->
+            <button class="collect-button hidden" id="collectButton">
+                <span class="button-text">COLLECT PHOTOS</span>
+                <span class="button-arrow">➺</span>
+            </button>
+
+            <!-- Instructions panel (always visible) -->
+            <div class="instructions-panel">
+                <img src="pravila.png" alt="Instructions" class="instructions-image">
+            </div>
+        </div>
+        
+
+    </div>
+
+    <!-- Hidden canvas for capturing photos -->
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+
+    <script src="camera.js"></script>
+</body>
+</html>

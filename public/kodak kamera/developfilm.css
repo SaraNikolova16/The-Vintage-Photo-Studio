@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kalam', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8 0%, #ffe8f5 50%, #fff0f8 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+    position: relative;
+    gap: 3rem;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 192, 203, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   PHOTOS CONTAINER
+   ============================================ */
+
+.photos-container {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   VINTAGE PHOTO FRAMES
+   ============================================ */
+
+.vintage-photo {
+    position: relative;
+    width: 400px;
+    background: #181717;
+    padding: 12px 12px 40px 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Tilted photos */
+.photo-1 {
+    transform: rotate(-3deg);
+}
+
+.photo-2 {
+    transform: rotate(2deg);
+}
+
+.photo-3 {
+    transform: rotate(-2deg);
+}
+
+/* Hover effect - lift up */
+.vintage-photo:hover {
+    transform: translateY(-15px) scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+/* Photo content area - HORIZONTAL RECTANGLE */
+.photo-content {
+    width: 100%;
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Apply vintage film filter */
+.photo-content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 200, 120, 0.25) 0%,
+        rgba(255, 220, 150, 0.15) 50%,
+        rgba(255, 180, 100, 0.2) 100%
+    );
+    background-image: radial-gradient(ellipse, #0000, #0007),
+        linear-gradient(0deg, #9725, #9725),
+        url(https://i.ibb.co/vJt5HSh/noisy-texture-300x300-o10-d10-c-a82851-t1.png);
+    filter: blur(0.05rem) saturate(0.7) contrast(1.5) brightness(1.2);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.photo-content {
+    filter: 
+        saturate(1.2)
+        contrast(0.9)
+        brightness(1.05)
+        sepia(0.15)
+        hue-rotate(-5deg);
+}
+
+.photo-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 30%,
+        rgba(0, 0, 0, 0.15) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Date at bottom */
+.photo-date {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 400;
+}
+
+/* Checkbox for selection */
+.photo-checkbox {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vintage-photo:hover .photo-checkbox {
+    opacity: 1;
+}
+
+.photo-checkbox:checked {
+    opacity: 1;
+}
+
+.checkbox-label {
+    position: absolute;
+    top: 22px;
+    left: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(253, 218, 218, 0.756);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.vintage-photo:hover .checkbox-label {
+    opacity: 1;
+}
+
+.photo-checkbox:checked ~ .checkbox-label {
+    opacity: 1;
+}
+
+/* Selected photo highlight */
+.photo-checkbox:checked ~ .photo-content {
+    outline: 5px solid #ff9ece;
+    outline-offset: -5px;
+}
+
+/* ============================================
+   ACTION BUTTONS
+   ============================================ */
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.action-btn {
+    background: white;
+    border: 3px solid #3e2723;
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #3e2723;
+    font-family: 'Kalam', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:hover {
+    background: #3e2723;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+/* ============================================
+   FULLSCREEN VIEWER
+   ============================================ */
+
+.fullscreen-viewer {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #3e2723;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #ff9ece;
+    color: white;
+    transform: scale(1.1);
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #3e2723;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev-btn {
+    left: 2rem;
+}
+
+.next-btn {
+    right: 2rem;
+}
+
+.nav-btn:hover {
+    background: #ff9ece;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vintage-photo {
+        width: 280px;
+    }
+    
+    .photo-content {
+        height: 350px;
+    }
+    
+    .action-buttons {
+        gap: 1rem;
+    }
+    
+    .action-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+}

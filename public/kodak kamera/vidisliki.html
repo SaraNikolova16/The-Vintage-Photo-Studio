@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Delivery</title>
+    <link rel="stylesheet" href="vidisliki.css">
+</head>
+<body>
+    
+    <!-- Film roll container (slides in from right) -->
+    <div class="film-container" id="filmContainer">
+        
+        <!-- Film roll frame overlay -->
+        <img src="tapess0000.png" alt="Film Roll" class="film-frame">
+        
+        <!-- Photo 1 (behind film roll) -->
+        <div class="film-photo photo-1" id="photo1"></div>
+        
+        <!-- Photo 2 (behind film roll) -->
+        <div class="film-photo photo-2" id="photo2"></div>
+        
+        <!-- Photo 3 (behind film roll) -->
+        <div class="film-photo photo-3" id="photo3"></div>
+        
+    </div>
+
+     <!-- Develop Film button (appears after slide) -->
+    <button class="develop-btn hidden" id="developBtn">
+        <span class="btn-text">Develop Film</span>
+        <span class="btn-icon">🎞️</span>
+    </button>
+
+    <script src="vidisliki.js"></script>
+</body>
+</html>

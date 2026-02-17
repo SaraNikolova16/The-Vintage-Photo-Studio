@@ -1,0 +1,92 @@
+/* ============================================
+   HOMEPAGE - VINTAGE PAPER BACKGROUND
+   ============================================ */
+
+.homepage {
+  min-height: 100vh;
+ 
+  background: 
+    /* Paper texture */
+    linear-gradient(135deg, 
+      #f5e6d3 0%, 
+      #f0ddc8 25%,
+      #f5e6d3 50%,
+      #ede0cc 75%,
+      #f5e6d3 100%
+      
+
+    );
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle wrinkles/creases */
+.homepage::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse at 20% 30%, rgba(0,0,0,0.02) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(0,0,0,0.015) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.01) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Very subtle paper grain */
+.homepage::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+   background-image: url("download\ \(21\).jpg");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 0;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #8b4513;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+
+.footer p {
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}

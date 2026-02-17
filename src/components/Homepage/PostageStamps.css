@@ -1,0 +1,84 @@
+.postage-stamps-section {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 4rem auto 2rem;
+  background: linear-gradient(135deg, #d4af37 0%, #c9a961 50%, #b8935c 100%);
+  background-image: url("Redraw\ &\ cut\ by\ Bồ\ Đào\ cô\ nương_.jpg");
+  background-size: cover; /* Adjust as needed (cover, contain, etc.) */
+  border-radius: 25px;
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.2),
+    inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.stamps-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #3d2817;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+   z-index: 10;
+}
+
+.stamps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+  padding: 1.5rem;
+  justify-items: center;
+}
+
+.stamp-link {
+  display: block;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.8s ease-out both;
+  max-width: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stamp-link:hover {
+  transform: translateY(-15px) rotate(3deg) scale(1.05);
+}
+
+.stamp-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+  transition: filter 0.3s ease;
+   z-index: 15;
+}
+
+.stamp-link:hover .stamp-image {
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.4));
+}
+
+@media (max-width: 768px) {
+  .postage-stamps-section {
+    padding: 3rem 1rem;
+    margin: 3rem auto 2rem;
+  }
+  
+  .stamps-title {
+    font-size: 2rem;
+  }
+  
+  .stamps-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem;
+  }
+}

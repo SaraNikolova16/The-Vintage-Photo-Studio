@@ -1,0 +1,168 @@
+// ============================================
+// VINTAGE PHOTOBOOTH - RESULTS PAGE
+// ============================================
+
+// DOM Elements
+const photoStripCanvas = document.getElementById('photoStrip');
+const downloadBtn = document.getElementById('downloadBtn');
+const shareBtn = document.getElementById('shareBtn');
+const printBtn = document.getElementById('printBtn');
+const restartBtn = document.getElementById('restartBtn');
+
+// State
+let capturedPhotos = [];
+
+// ============================================
+// INITIALIZATION
+// ============================================
+
+/**
+ * Load photos and create photo strip
+ */
+function init() {
+    console.log('🎉 Results page loaded');
+    
+    // Get photos from sessionStorage
+    const photosData = sessionStorage.getItem('finalPhotos');
+    
+    if (photosData) {
+        capturedPhotos = JSON.parse(photosData);
+        console.log(`✅ Loaded ${capturedPhotos.length} photos`);
+        
+        // Create photo strip
+        createPhotoStrip();
+    } else {
+        console.error('❌ No photos found!');
+        alert('No photos found. Returning to start...');
+        window.location.href = 'index.html';
+    }
+}
+
+// ============================================
+// PHOTO STRIP CREATION
+// ============================================
+
+/**
+ * Create final photo strip on canvas
+ */
+function createPhotoStrip() {
+    const canvas = photoStripCanvas;
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size
+    canvas.width = 400;
+    canvas.height = 1100;
+    
+    // Calculate photo height
+    const photoHeight = canvas.height / 4;
+    
+    // Draw each photo
+    capturedPhotos.forEach((photoData, index) => {
+        const img = new Image();
+        img.onload = function() {
+            // Draw photo
+            ctx.drawImage(img, 0, index * photoHeight, canvas.width, photoHeight);
+            
+            // Draw separator line between photos
+            if (index < 3) {
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.moveTo(0, (index + 1) * photoHeight);
+                ctx.lineTo(canvas.width, (index + 1) * photoHeight);
+                ctx.stroke();
+            }
+        };
+        img.src = photoData;
+    });
+    
+    console.log('✅ Photo strip created!');
+}
+
+// ============================================
+// ACTION BUTTONS
+// ============================================
+
+/**
+ * Download photo strip as JPG
+ */
+function downloadPhotoStrip() {
+    const link = document.createElement('a');
+    link.download = `vintage-photobooth-${Date.now()}.jpg`;
+    link.href = photoStripCanvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+    console.log('📥 Photo strip downloaded!');
+}
+
+/**
+ * Share photo strip
+ */
+function sharePhotoStrip() {
+    photoStripCanvas.toBlob(async (blob) => {
+        const file = new File([blob], 'photobooth.jpg', { type: 'image/jpeg' });
+        
+        // Try native share if available
+        if (navigator.share && navigator.canShare({ files: [file] })) {
+            try {
+                await navigator.share({
+                    files: [file],
+                    title: 'My Vintage Photobooth Strip!',
+                    text: 'Check out my photobooth pics!'
+                });
+                console.log('✅ Shared successfully!');
+            } catch (error) {
+                console.log('Share cancelled');
+            }
+        } else {
+            // Fallback: just download
+            alert('Share not supported. Use download button instead!');
+            downloadPhotoStrip();
+        }
+    });
+}
+
+/**
+ * Print photo strip
+ */
+function printPhotoStrip() {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print Photo Strip</title></head><body style="margin:0;padding:20px;text-align:center;">');
+    printWindow.document.write(`<img src="${photoStripCanvas.toDataURL()}" style="max-width:100%;height:auto;">`);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+    console.log('🖨 Print dialog opened!');
+}
+
+/**
+ * Restart photobooth
+ */
+function restart() {
+    sessionStorage.clear();
+    window.location.href = 'fotokabinapocetok.html';
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+downloadBtn.addEventListener('click', downloadPhotoStrip);
+shareBtn.addEventListener('click', sharePhotoStrip);
+printBtn.addEventListener('click', printPhotoStrip);
+restartBtn.addEventListener('click', restart);
+
+// Keyboard shortcut
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'r') {
+        restart();
+    }
+});
+
+// ============================================
+// INITIALIZATION ON PAGE LOAD
+// ============================================
+
+document.addEventListener('DOMContentLoaded', init);
+
+console.log('📸 Vintage Photobooth Results Ready!');
+console.log('💡 Press "R" to restart');
